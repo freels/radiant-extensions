@@ -1,1 +1,7 @@
-<td><%= page.group_name %></td>
+<td>
+<%- if current_user.groups.include? page.group -%>
+<%= page.group_name %>
+<%- else -%>
+<span style="color: #999"><%= page.group_name %></span>
+<%- end -%>
+</td>

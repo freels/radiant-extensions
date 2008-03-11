@@ -17,7 +17,6 @@ class CreateGroups < ActiveRecord::Migration
 
   def self.down
     remove_column :pages, :group_id
-    remove_column :users, :group_id
     drop_table :groups
     drop_table :groups_users
   end

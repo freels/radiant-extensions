@@ -9,11 +9,18 @@ PageControllerExtensions = Proc.new do
     
     page = Page.find(params[:id] || params[:parent_id])
     
-    until page.parent.nil? do
+    until page.nil? do
       return true if page.group_owners.include? current_user
       page = page.parent
     end
     
     return false
+  end
+  
+  before_filter :disallow_group_edits
+  def disallow_group_edits
+    if params[:page] && !current_user.admin?
+      params[:page].delete(:group_id)
+    end
   end
 end

@@ -1,14 +1,44 @@
+<%- content_for :page_css do -%>
+#content table.index .node .group {
+    font-size: 115%;
+    font-weight: bold;
+}
+
+#content table.index .node .group a {
+    color: black;
+    text-decoration: none;
+}
+
+#content table.index .node .group a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+<%- end -%>
+
 <h1>Groups</h1>
 
-<ul>
+<p>Use groups to organize your normal users into publishing teams, with rights to modify certain sections of your site. A user can belong to any number of groups. When a page is owned by a group, its members may edit the page or any underneath it in the site hierarchy. Administrators and Developers can be added to groups, but they already have editing rights to all pages.</p>
+
+<table id="groups" class="index" cellpadding="0" cellspacing="0" border="0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Members</th>
+        </tr>
+    </thead>
+    <tbody>
     <%- @groups.each do |group| -%>
-    <li>
-        <h2><%= group.name %></h2>
-        <ul>
-            <%- group.users.each do |user| -%>
-            <li><%= user.name %>, <%= user.email %></li>
-            <%- end -%>
-        </ul>
-    </li>
+    <tr class="node">
+        <td class="group"><%= link_to group.name, :action => 'edit', :id => group.id %></td>
+        <td class="users">
+        <%- group.users.each do |user| -%>
+            <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
+        <%- end -%>
+        </td>
+    </tr>
     <%- end -%>
-</ul>
+    <tbody>
+</table>
+
+<p><%= link_to image('new-user', :alt => 'New Group'), :action => 'new' %></p>

@@ -1,3 +1,7 @@
+UserActionObserverExtensions = Proc.new do
+  observe User, Page, Layout, Snippet, Group
+end
+
 PageControllerExtensions = Proc.new do
   only_allow_access_to :new, :edit,
     :if => :user_is_in_page_group,

@@ -10,13 +10,19 @@ class PageGroupPermissionsExtension < Radiant::Extension
   url "http://matt.freels.name"
   
   define_routes do |map|
-    map.connect 'admin/groups/:action', :controller => 'admin/group'
+    map.with_options(:controller => 'admin/group') do |group|
+      group.group_index 'admin/groups', :action => 'index'
+      group.group_edit 'admin/groups/edit/:id',             :action => 'edit'
+      group.group_new 'admin/groups/new',                  :action => 'new'
+      group.group_remove 'admin/groups/remove/:id',           :action => 'remove'  
+    end
   end
   
   def activate
     User.module_eval &UserModelExtensions
     Page.module_eval &PageModelExtensions
     Admin::PageController.module_eval &PageControllerExtensions
+    UserActionObserver.module_eval &UserActionObserverExtensions
     
     admin.tabs.add "Groups", "/admin/groups", :after => "Layouts", :visibility => [:admin]
     admin.page.index.add :node, "page_group_td", :before => "status_column"

@@ -2,6 +2,8 @@ class CreateGroups < ActiveRecord::Migration
   def self.up
     create_table :groups do |t|
       t.string :name
+      t.text :notes
+      t.integer :created_by, :updated_by
 
       t.timestamps
     end

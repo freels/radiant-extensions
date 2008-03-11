@@ -1,0 +1,28 @@
+<% if @group.new_record? -%>
+<h1 id="new_page">New Group</h1>
+<% else -%>
+<h1 id="edit_page">Edit Group</h1>
+<% end -%>
+
+<% form_for :group do |f| %>
+<table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td class="label"><label for="group_name">Name</label></td>
+        <td class="field"><%= f.text_field "name", :class => 'textbox', :maxlength => 100 %></td>
+        <td class="help">Required.</td>
+    </tr>
+    <tr>
+        <td class="label"><label class="optional" for="group_notes">Notes</label></td>
+        <td class="field"><%= f.text_area "notes", :size => '40x4' %></td>
+        <td class="help">Optional.</td>
+    </tr>
+  </table>
+
+<%= updated_stamp @group %>
+<p class="buttons">
+  <%= save_model_button(@group) %> <%= save_model_and_continue_editing_button(@group) %> or <%= link_to "Cancel", group_index_url %>
+</p>
+
+<% end %>
+
+<%= focus 'group_name' %>

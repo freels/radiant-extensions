@@ -1,3 +1,16 @@
 = Page Group Permissions
 
-Description goes here
+Created by Matt Freels
+
+This extension allows you to organize your users into groups and divide up site-editing privileges accordingly.
+To install, add page_group_permissions to vendor/extensions, and run rake db:extensions:migrate
+
+Basic Usage:
+
+Create and edit groups and add/remove members from the new groups tag.
+Add page to a group by editing the page.
+A member of a group has permission to edit any page owned by the group or children of said pages.
+
+Enjoy!
+
+Feedback appreciated at matt@freels.name

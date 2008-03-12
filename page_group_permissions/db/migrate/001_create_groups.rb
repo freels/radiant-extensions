@@ -14,7 +14,14 @@ class CreateGroups < ActiveRecord::Migration
     add_index :groups_users, [:group_id, :user_id]
     
     add_column :pages, :group_id, :integer
-    add_column :users, :group_id, :integer
+    
+    #Add a default group to own the home page
+    Group.reset_column_information
+    Page.reset_column_information
+    
+    p = Page.find_by_parent_id(nil)
+    p.group = Group.create(:name => 'Site Editors')
+    p.save
   end
 
   def self.down

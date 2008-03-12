@@ -15,6 +15,8 @@ class PageGroupPermissionsExtension < Radiant::Extension
       group.group_edit 'admin/groups/edit/:id',             :action => 'edit'
       group.group_new 'admin/groups/new',                  :action => 'new'
       group.group_remove 'admin/groups/remove/:id',           :action => 'remove'  
+      group.group_add_member 'admin/groups/add_member/:id',           :action => 'add_member'  
+      group.group_remove_member 'admin/groups/remove_member/:id',           :action => 'remove_member'  
     end
   end
   

@@ -1,0 +1,6 @@
+<h1>Remove Member</h1>
+<p>Are you sure you want to remove <strong><%=h @user.name %></strong> from the group <strong><%= @group.name %></strong>?</p>
+
+<form method="post" action="">
+  <p class="buttons"><%= submit_tag "Remove Member", :class => 'button' %> or <%= link_to 'Cancel', group_index_url %></p>
+</form>

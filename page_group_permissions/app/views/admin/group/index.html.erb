@@ -14,8 +14,26 @@
     text-decoration: underline;
 }
 
-#content table.index .user .name {
+#content table.index .user .name,
+#content table.index .user .none {
     padding-left: 26px;
+}
+
+#content table.index .node .note,
+#content table.index .user .none {
+    color: #666;
+    font-size: 90%;
+    font-style: italic;
+    font-weight: normal;
+    margin-left: .5em;
+}
+
+#content table.index .node .add-child {
+    width: 200px;
+}
+
+#content table.index .node .add-child form {
+    margin: 0;
 }
 
 <%- end -%>
@@ -34,18 +52,37 @@
     <tbody>
     <%- @groups.each do |group| -%>
     <tr class="node">
-        <td class="group"><%= link_to group.name, :action => 'edit', :id => group.id %></td>
-        <td class="add-child"><%= link_to image('add-child', :alt => 'Add Group Member'), '#' %></td>
-        <td class="remove"><%= link_to image('remove', :alt => 'Remove Group'), group_remove_url(:id => group) %></td>
+        <td class="group">
+            <%= link_to group.name, :action => 'edit', :id => group.id %>
+            <small class="note"><%=h group.notes %></small>
+        </td>
+        <td class="add-child">
+            <form method="post" action="<%= group_add_member_url :id => group %>">
+                <select name="user_id", id="user_id">
+                    <%= options_for_select User.find(:all, :order => 'name ASC').map{|u| [u.name, u.id]}.unshift(['—', '']) %>
+                </select>
+                <%= image_submit_tag('admin/add-child.png', :alt => 'Add Group Member') %>
+            </form>
+        </td>
+        <td class="remove">
+            <%= link_to image('remove', :alt => 'Remove Group'), group_remove_url(:id => group) %>
+        </td>
     </tr>
         <%- group.users.each do |user| -%>
         <tr class="user">
             <td class="name" colspan="2" >
                 <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
             </td>
-            <td class="remove"><%= link_to image('remove', :alt => 'Remove Group Member'), '#' %></td>
+            <td class="remove">
+                <%= link_to image('remove', :alt => 'Remove Group Member'), group_remove_member_url(:id => group, :user_id => user) %>
+            </td>
         </tr>
-        <%- end -%>    
+        <%- end -%>
+        <%- if group.users.empty? -%>
+        <tr class="user">
+            <td class="none" colspan="3" >no members</td>
+        </tr>
+        <%- end -%>
     <%- end -%>
     <tbody>
 </table>

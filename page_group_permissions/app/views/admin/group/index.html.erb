@@ -14,6 +14,10 @@
     text-decoration: underline;
 }
 
+#content table.index .user .name {
+    padding-left: 26px;
+}
+
 <%- end -%>
 
 <h1>Groups</h1>
@@ -24,19 +28,24 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Members</th>
+            <th colspan="2">Modify</th>
         </tr>
     </thead>
     <tbody>
     <%- @groups.each do |group| -%>
     <tr class="node">
         <td class="group"><%= link_to group.name, :action => 'edit', :id => group.id %></td>
-        <td class="users">
-        <%- group.users.each do |user| -%>
-            <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
-        <%- end -%>
-        </td>
+        <td class="add-child"><%= link_to image('add-child', :alt => 'Add Group Member'), '#' %></td>
+        <td class="remove"><%= link_to image('remove', :alt => 'Remove Group'), group_remove_url(:id => group) %></td>
     </tr>
+        <%- group.users.each do |user| -%>
+        <tr class="user">
+            <td class="name" colspan="2" >
+                <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
+            </td>
+            <td class="remove"><%= link_to image('remove', :alt => 'Remove Group Member'), '#' %></td>
+        </tr>
+        <%- end -%>    
     <%- end -%>
     <tbody>
 </table>

@@ -1,0 +1,23 @@
+<%- content_for :page_css do -%>
+#content table.index .node .group {
+    font-size: 115%;
+    font-weight: bold;
+}
+<%- end -%>
+
+<h1>Remove Group</h1>
+<p>Are you sure you want to <strong class="warning">permanently remove</strong> the following group?</p>
+
+<table id="site-map" class="index" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+    <tr class="node" onmouseover="Element.addClassName(this, 'highlight');" onmouseout="Element.removeClassName(this, 'highlight');">
+      <td class="group">
+        <%= @group.name %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form method="post" action="">
+  <p class="buttons"><%= submit_tag "Delete Group", :class => 'button' %> or <%= link_to 'Cancel', group_index_url %></p>
+</form>

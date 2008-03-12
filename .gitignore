@@ -1,0 +1,6 @@
+# os x directory view pref files
+.DS_Store
+
+# take care of emacs working files
+\#*\#
+*~

@@ -61,7 +61,7 @@
                 <select name="user_id", id="user_id">
                     <%= options_for_select User.find(:all, :order => 'name ASC').map{|u| [u.name, u.id]}.unshift(['—', '']) %>
                 </select>
-                <%= image_submit_tag('admin/add-child.png', :alt => 'Add Group Member') %>
+                <%= image_submit_tag('page_group_permissions/add-member.png', :alt => 'Add Group Member') %>
             </form>
         </td>
         <td class="remove">
@@ -74,7 +74,7 @@
                 <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
             </td>
             <td class="remove">
-                <%= link_to image('remove', :alt => 'Remove Group Member'), group_remove_member_url(:id => group, :user_id => user) %>
+                <%= link_to image_tag('page_group_permissions/remove-member.png', :alt => 'Remove Group Member'), group_remove_member_url(:id => group, :user_id => user) %>
             </td>
         </tr>
         <%- end -%>
@@ -87,4 +87,4 @@
     <tbody>
 </table>
 
-<p><%= link_to image('new-user', :alt => 'New Group'), :action => 'new' %></p>
+<p><%= link_to image_tag('page_group_permissions/new-group.png', :alt => 'New Group'), :action => 'new' %></p>

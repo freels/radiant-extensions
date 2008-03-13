@@ -4,12 +4,22 @@
     font-weight: bold;
 }
 
+#content table.index .user .name {
+    font-size: 107%;
+}
+
+#content table.index .user .name a {
+    color: #444;
+    text-decoration: none;
+}
+
 #content table.index .node .group a {
     color: black;
     text-decoration: none;
 }
 
-#content table.index .node .group a:hover {
+#content table.index .node .group a:hover,
+#content table.index .user .name a:hover {
     color: blue;
     text-decoration: underline;
 }
@@ -70,7 +80,7 @@
     </tr>
         <%- group.users.each do |user| -%>
         <tr class="user">
-            <td class="name" colspan="2" >
+            <td class="name" colspan="2">
                 <%= link_to user.name, :controller => '/admin/user', :action => 'edit', :id => user.id %>
             </td>
             <td class="remove">

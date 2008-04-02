@@ -5,5 +5,7 @@ class Group < ActiveRecord::Base
   
   has_and_belongs_to_many :users
   has_many :pages
-
+  
+  validates_presence_of :name, :message => 'required'
+  validates_length_of :name, :maximum => 100, :message => "%d-character limit"
 end

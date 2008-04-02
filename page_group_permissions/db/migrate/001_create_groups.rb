@@ -11,7 +11,8 @@ class CreateGroups < ActiveRecord::Migration
     create_table(:groups_users, :id => false) do |t|
       t.integer :group_id, :user_id
     end
-    add_index :groups_users, [:group_id, :user_id]
+    add_index :groups_users, :group_id
+    add_index :groups_users, :user_id
     
     add_column :pages, :group_id, :integer
     
@@ -19,9 +20,12 @@ class CreateGroups < ActiveRecord::Migration
     Group.reset_column_information
     Page.reset_column_information
     
+    g = Group.create(:name => 'Site Editors')
     p = Page.find_by_parent_id(nil)
-    p.group = Group.create(:name => 'Site Editors')
-    p.save
+    if p
+      p.group = g
+      p.save
+    end
   end
 
   def self.down

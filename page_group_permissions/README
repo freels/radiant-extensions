@@ -6,7 +6,7 @@ This extension allows you to organize your users into groups and divide up site-
 
 To install, add page_group_permissions to vendor/extensions, and run:
 
-rake db:extensions:migrate
+rake db:migrate:extensions
 rake radiant:extensions:page_group_permissions:update
 
 Basic Usage:
